@@ -7,6 +7,7 @@ import {
     handleDeleteProject,
 } from "../controller/projectController.js";
 import {validateProjectPostRequest} from "../middleware/projectPostRequestValidator.js";
+import {validateProjectPutRequest} from "../middleware/projectPutRequestValidator.js";
 
 
 const projectRouter = express.Router();
@@ -23,7 +24,7 @@ projectRouter.post("/", validateProjectPostRequest, async (req, res) => {
     return await handleCreateProject(req, res);
 });
 
-projectRouter.put("/:projectId", async (req, res) => {
+projectRouter.put("/:projectId", validateProjectPutRequest, async (req, res) => {
     return await handleUpdateProject(req, res);
 });
 
